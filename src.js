@@ -12,16 +12,16 @@ $(document).ready(function() {
   });
 
   $("td").click(function() {
-    move(this, huPlayer, humanSign);
+    move(this, huPlayer, humanSign)
   });
 });
 
   
-let board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-let huPlayer = "P";
-let coPlayer = "C";
-let iter = 0;
-let round = 0;
+let board = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+let huPlayer = "P"
+let coPlayer = "C"
+let iter = 0
+let round = 0
 
 let computerSign = "X"
 let humanSign = "O"
@@ -29,7 +29,7 @@ let humanSign = "O"
 
 let removeMenu = () => {
   $(".options, p").remove()
-  $("td, table").css("visibility", "visible");
+  $("td, table").css("visibility", "visible")
 }
 
 let signBlock = (sign) => {
@@ -64,7 +64,7 @@ let move = (element, player, sign) => {
     let index = minmax(board, coPlayer).index
     let selector = "#" + index
     $(selector).html(signBlock(computerSign))
-    board[index] = coPlayer;
+    board[index] = coPlayer
     
     if (winning(board, coPlayer)) {
       setTimeout(() => {
@@ -112,17 +112,17 @@ let minmax = (reboard, player) => {
     reboard[array[i]] = player
 
     if (player == coPlayer) {
-      let g = minmax(reboard, huPlayer);
+      let g = minmax(reboard, huPlayer)
       move.score = g.score
     } else {
-      let g = minmax(reboard, coPlayer);
+      let g = minmax(reboard, coPlayer)
       move.score = g.score
     }
     reboard[array[i]] = move.index
     moves.push(move)
   }
 
-  let bestMove;
+  let bestMove
   if (player === coPlayer) {
     let bestScore = -10000
     for (let i = 0; i < moves.length; i++) {
@@ -140,7 +140,7 @@ let minmax = (reboard, player) => {
       }
     }
   }
-  return moves[bestMove];
+  return moves[bestMove]
 }
   
 // available spots
