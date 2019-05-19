@@ -6,16 +6,13 @@ $(document).ready(function() {
     removeMenu()
     computerSign = "O"
     humanSign = "X"
-    console.log("white");
   });
   $("#opt2").click(function() {
     removeMenu()
-    console.log("black");
   });
 
   $("td").click(function() {
     move(this, huPlayer, humanSign);
-    console.log("clicked");
   });
 });
 
@@ -69,9 +66,6 @@ let move = (element, player, sign) => {
     $(selector).html(signBlock(computerSign))
     board[index] = coPlayer;
     
-    console.log(board);
-    console.log(index);
-
     if (winning(board, coPlayer)) {
       setTimeout(() => {
         alert("You lose")
