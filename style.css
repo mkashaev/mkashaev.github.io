@@ -18,13 +18,6 @@ html, body {
   margin-right: auto;
 }
 
-p {
-  font-size: 500%;
-  padding-top: 20px;
-  margin-bottom: 50px;
-  text-align: center;
-}
-
 .options {
   display: flex;
   justify-content: space-around;
