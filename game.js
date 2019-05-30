@@ -1,27 +1,3 @@
-
-
-
-document.addEventListener("DOMContentLoaded", ready);
-
-function ready() {
-  var game = new Game();
- 
-  // Remove opitons
-  var opt1 = document.getElementById("opt1");
-  opt1.addEventListener('click', function() {
-    game.removeMenu();
-  })
-
-  // Game loop
-  var tdList = document.getElementsByTagName("td")
-  for (var i = 0; i < tdList.length; i++) {
-    tdList[i].addEventListener('click', function() {
-      game.loop(this);
-    })
-  }
-}
-
-
 function Game() {
   this.board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   this.iter = 0;
@@ -29,13 +5,13 @@ function Game() {
 }
 
 Game.prototype.removeMenu = function () {
-  // Remove options
+  // $(".options, p").remove();
   var options = document.getElementsByClassName("options");
   options[0].parentNode.removeChild(options[0]);
   var pList = document.getElementsByTagName("p");
   pList[0].parentNode.removeChild(pList[0]);
   
-  // Make table visible
+  // $("td, table").css("visibility", "visible");
   var tdList = document.getElementsByTagName("td");
   for (var i = 0; i < tdList.length; i++) {
     tdList[i].style.visibility = "visible";
@@ -52,7 +28,7 @@ Game.prototype.reset = function() {
   this.round = 0;
   this.board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   
-  // claer td cells
+  // $("td").html("");
   var tdList = document.getElementsByTagName("td");
   for (var i = 0; i < tdList.length; i++) {
     tdList[i].innerHTML = ""
@@ -91,10 +67,12 @@ Game.prototype.loop = function(element) {
   if (this.board[element.id] !== "X" && this.board[element.id] !== "O") {
     this.round++;
     
-    // Chosen cell make mark by X
+    // $(element).html(this.signBlock("X"));
     element.innerHTML = this.signBlock("X")
     
     this.board[element.id] = "X";
+
+    
 
     var _this = this;
     if (this.winning("X")) {
@@ -116,6 +94,8 @@ Game.prototype.loop = function(element) {
     this.round++;
     var index = this.randomMove();
     
+    // var selector = "#" + index;
+    // $(selector).html(this.signBlock("O"));
     var elem = document.getElementById(index);
     elem.innerHTML = this.signBlock("O");
     
@@ -131,54 +111,4 @@ Game.prototype.loop = function(element) {
   }
 }
 
-
-// let minmax = (reboard, player) => {
-//   iter++
-//   let array = available(reboard)
-//   if (winning(reboard, huPlayer)) {
-//     return {score: -10}
-//   }
-//   if (winning(reboard, coPlayer)) {
-//     return {score: 10}
-//   }
-//   if (array.length === 0) {
-//     return {score: 0}
-//   }
-
-//   let moves = []
-//   for (let i = 0; i < array.length; i++) {
-//     let move = {}
-//     move.index = reboard[array[i]]
-//     reboard[array[i]] = player
-
-//     if (player == coPlayer) {
-//       let g = minmax(reboard, huPlayer)
-//       move.score = g.score
-//     } else {
-//       let g = minmax(reboard, coPlayer)
-//       move.score = g.score
-//     }
-//     reboard[array[i]] = move.index
-//     moves.push(move)
-//   }
-
-//   let bestMove
-//   if (player === coPlayer) {
-//     let bestScore = -10000
-//     for (let i = 0; i < moves.length; i++) {
-//       if (moves[i].score > bestScore) {
-//         bestScore = moves[i].score
-//         bestMove = i
-//       }
-//     }
-//   } else {
-//     let bestScore = 10000
-//     for (let i = 0; i < moves.length; i++) {
-//       if (moves[i].score < bestScore) {
-//         bestScore = moves[i].score
-//         bestMove = i
-//       }
-//     }
-//   }
-//   return moves[bestMove]
-// }
+module.exports = Game
